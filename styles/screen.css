@@ -1,50 +1,91 @@
-body {
-    font-family: Helvetica, sans-serif;
-    color: #EAE8FF;
-    background: #2D3142;
-    padding: 0 40px;
-    text-align: center;
+/* Site stylesheet for MI-349 sample site */
+:root{
+	--bg: #f8fafc;
+	--accent: #7c3aed;
+	--muted: #6b7280;
+	--card: #ffffff;
+	--max-width: 980px;
 }
 
-nav {
-    margin: 40px auto 0 auto;
-    width: 250px;
-    border-radius: 50px;
-    background: #212431;
+*{box-sizing:border-box}
+html, body { height:100%; }
+body{
+	margin:0;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	background: linear-gradient(180deg,var(--bg), #eef2ff 60%);
+	color:#0f172a;
+	-webkit-font-smoothing:antialiased;
+		padding:2rem; /* outer breathing room */
+		display:flex;
+		flex-direction:column;     /* stack children vertically */
+		align-items:center;        /* center the main column */
+		justify-content:flex-start;
+		min-height:100vh; /* ensure viewport-filling column so footer can sit at bottom */
 }
 
-nav ul {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 0;
-    padding: 0;
+.content, main{width:100%;max-width:var(--max-width)}
+
+/* Ensure top-level nav, content and footer share the same centered max-width */
+body > nav, body > footer, body > main, body > .content {
+	width:100%;
+	max-width:var(--max-width);
 }
 
-nav ul li {
-    list-style-type: none;
-    margin: 0;
+/* Let the main content expand to push footer to the bottom */
+main.content{
+	flex:1 0 auto; /* grow to fill available vertical space */
+	display:block;
+	padding-top:1rem;
+	padding-bottom:1rem;
 }
 
-nav ul li a {
-    display: inline-block;
-    padding: 20px;
-    color: #EAE8FF;
-    text-decoration: none;
-    font-size: 1.2em;
+/* Make footer span the centered column and sit after the flexible main area */
+footer{
+	align-self:stretch;
 }
 
-h1 {
-    font-size: 8em;
-    letter-spacing: -2px;
+/* Navigation */
+nav{
+	background: rgba(255,255,255,0.75);
+	backdrop-filter: blur(6px);
+	border-radius:10px;
+	padding:0.6rem 1rem;
+	margin-bottom:1.25rem;
+	box-shadow:0 2px 8px rgba(16,24,40,0.05);
+}
+nav a{ color:var(--accent); text-decoration:none; font-weight:600;}
+nav a:hover{ text-decoration:underline; }
+
+/* Headings */
+h1{font-size:2.1rem;margin:0 0 .25rem;color:#0b1220}
+h2{font-size:1.05rem;color:var(--muted);margin-top:0}
+
+/* Index list layout */
+ul{list-style:none;padding:0;margin:1rem 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+li{background:var(--card);padding:1rem;border-radius:10px;box-shadow:0 1px 3px rgba(16,24,40,0.04);transition:transform .12s ease,box-shadow .12s ease}
+li a{color:#0f172a;text-decoration:none;display:block;font-weight:700}
+li:hover{transform:translateY(-4px);box-shadow:0 8px 22px rgba(16,24,40,0.08)}
+
+/* Images */
+img{max-width:100%;height:auto;display:block}
+.item-photo{width:100%;max-width:420px;border-radius:8px;margin:.5rem 0;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+.about{width:120px;height:120px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+
+/* Text */
+p, h3 { color:#374151 }
+
+/* Footer */
+footer{margin-top:2.25rem;text-align:center;color:var(--muted);font-size:.9rem;padding:1rem}
+
+/* Utility */
+.container{padding:1rem}
+
+@media (max-width:560px){
+	body{padding:1rem}
+	h1{font-size:1.6rem}
+	.about{width:90px;height:90px}
 }
 
-h1 strong {
-    background: rgb(34,193,195);
-    background: linear-gradient(45deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+/* Small, subtle focus state for accessibility */
+a:focus{outline:3px solid rgba(124,58,237,0.16);outline-offset:3px}
 
-img.about {
-    opacity: 0.5;
-}
